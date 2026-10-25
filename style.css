@@ -206,7 +206,11 @@ button:active {
 
 #subscribeMessage {
     margin-top: 16px;
+<<<<<<< HEAD
     color: #626f63;
+=======
+    color: #555763;        
+>>>>>>> 9665f78eb3f280fddc3459b51b7fe830d7a3f6aa
 }
 
 #subscribeMessage.is-success {
@@ -219,6 +223,7 @@ button:active {
 
 #subscribeButton:disabled {
     color: #ffffff;
+<<<<<<< HEAD
     background-color: #737f73;
     cursor: not-allowed;
 }
@@ -267,3 +272,8 @@ body.dark #practiceFeedback { background-color: #34583e; }
     #practiceFlow button { width: 100%; }
     #practiceQuestion, #practiceJapanese { font-size: 22px; }
 }
+=======
+    background-color: #a8a8b2;
+    cursor: not-allowed;
+}
+>>>>>>> 9665f78eb3f280fddc3459b51b7fe830d7a3f6aa

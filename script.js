@@ -46,7 +46,6 @@ function handleSubscribe(event) {
 
 subscribeForm.addEventListener("submit", handleSubscribe);
 
-// 6주차 추가: 기존 이메일 신청 코드 아래에 이어서 작성합니다.
 const themeButton = document.querySelector("#themeButton");
 const userNameInput = document.querySelector("#userName");
 const userNameCount = document.querySelector("#userNameCount");
