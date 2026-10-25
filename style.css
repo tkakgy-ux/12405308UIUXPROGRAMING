@@ -1,16 +1,14 @@
 body {
-    color: #292a31;
+    color: #263c33;
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 18px;
     line-height: 1.6;
     margin: 0;
-    background-color: #f7f7fb;
+    background-color: #f7f7f2;
 }
 
 header, main, footer {
-    /* 좁은 화면에서도 사용 가능항 너비에 맞춰 줄어듭니다. */
     width: 100%;
-    /* 넓은 화면에서도 콘텐츠는 1100px보다 커지지 않습니다. */
     max-width: 1100px;
     margin: 0 auto;
     padding-left: 24px;
@@ -24,6 +22,7 @@ img{
     height: auto;
     margin: 20px auto;
 }
+
 header {
     padding-top: 48px;
     padding-bottom: 32px;
@@ -40,14 +39,13 @@ footer {
 
 nav {
     display: flex;
-    /* 메뉴가 들어갈 자리가 부족하면 다음줄로 이동 */
     flex-wrap: wrap;
     gap: 24px;
     margin-top: 24px;
 }
 
 nav a{
-    color: #5b5870;
+    color: #254d42;
     font-weight: 700;
     text-decoration: none;
 }
@@ -64,7 +62,7 @@ nav a{
 input {
     flex: 1;
     min-width: 0;
-    border: 1px solid #b8b7c5;
+    border: 1px solid #a9b6a5;
     padding: 12px;
 }
 
@@ -76,7 +74,7 @@ h1{
 }
 
 h2{
-    color: #635bff;
+    color: #254d42;
     font-size: 32px;
     font-weight: 800;
     line-height: 1.3;
@@ -89,30 +87,26 @@ h3{
 }
 
 p{
-    color:#555763;
+    color:#626f63;
     line-height: 1.7;
 }
+
 .features-list {
     list-style-type:none;
     padding-left: 0;
     margin: 0;
-
     display: grid;
-    /* 들어갈 수 있는 만큼 열을 만들고, 
-    카드 너비는 최소 260px부터 남은 공간까지 사용*/
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-
     gap: 24px;
-
 }
 
 .feature-card {
     min-width: 0;
     padding: 20px 24px;
-    margin-bottom: 0px;    
-    border: 1px solid #deddea;
+    margin-bottom: 0px;
+    border: 1px solid #dfe3da;
     border-radius: 12px;
-    background-color: #deddea;
+    background-color: #ffffff;
 }
 
 *,
@@ -121,13 +115,12 @@ p{
     box-sizing: border-box;
 }
 
-.subcribe-card{
+.subscribe-card{
     padding: 24px;
     margin-top: 32px;
-    background-color: #f4f3ff;
-    border: 1px solid #deddea;
+    background-color: #e9eedf;
+    border: 1px solid #dfe3da;
     border-radius: 12px;
-    
 }
 
 form{
@@ -140,7 +133,7 @@ input{
     flex: 1;
     min-width: 0;
     padding: 12px;
-    border: 1px solid #b8b7c5;
+    border: 1px solid #a9b6a5;
     border-radius: 10px;
 }
 
@@ -149,7 +142,7 @@ button{
     border: 0;
     border-radius: 10px;
     color: #ffffff;
-    background-color: #4b43db;
+    background-color: #254d42;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
 }
@@ -157,13 +150,12 @@ button{
 input, button {
     font: inherit;
 }
-
 button:hover {
-    background-color: #60aa76;
+    background-color: #386756;
 }
 
 button:focus, input:focus {
-    outline: 3px solid #b9b5ff;
+    outline: 3px solid #8da77d;
     outline-offset: 2px;
 }
 
@@ -171,60 +163,107 @@ button:active {
     transform: translateY(1px);
 }
 
-/*  웹페이지가 표시되는 가로 폭이 768pox 이하일때만 적용 */
-
 @media (max-width: 768px) {
     body {
         font-size:16px;
     }
-
     header{
         padding-top: 32px;
         padding-bottom: 24px;
     }
-
     section {
         margin-top: 40px;
     }
-
     h1{
         font-size: 36px;
     }
-
     h2{
         font-size: 28px;
     }
-
-    /* 가로 메뉴를 위에서 아래로 배치*/
     nav{
         flex-direction: column;
         align-items: stretch;
         gap: 8px;
     }
-
     nav a{
-        /* 링크 글자 주변에도 누를 수 있는 여백 추가 */
         padding: 8px 0;
     }
-
-    /* 기능 카드를 한 열로 배치 */
     .features-list {
         grid-template-columns: 1fr;
     }
-
-    /* 이메일 입력창과 버튼도 한 열로 배치*/
     form{
         flex-direction: column;
         align-items: stretch;
     }
-
     input,
     button{
-        width: 100%;   
+        width: 100%;
     }
-
     button{
-        /* 모바일에서도 버튼을 누르는 영역이 너무 낮아지지 않게 설정 */
         min-height: 48px;
     }
+}
+
+#subscribeMessage {
+    margin-top: 16px;
+    color: #626f63;
+}
+
+#subscribeMessage.is-success {
+    color: #245c3a;
+    background-color: #e7f7ed;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+#subscribeButton:disabled {
+    color: #ffffff;
+    background-color: #737f73;
+    cursor: not-allowed;
+}
+
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.tab { color: #254d42; background-color: #ffffff; border: 1px solid #a9b6a5; }
+.tab:hover { color: #ffffff; background-color: #386756; }
+.tab.is-active { color: #ffffff; background-color: #254d42; border-bottom: 4px solid #879c7f; font-weight: 700; }
+.panel[hidden], #travelFlow[hidden], .travel-step[hidden] { display: none; }
+#features .features-list { grid-template-columns: 1fr; }
+.interaction-item, .travel-step { margin-top: 20px; padding: 24px; border: 1px solid #dfe3da; border-radius: 12px; background-color: #ffffff; }
+.interaction-item label:not(.agree-row), .travel-step label { display: block; margin-top: 16px; margin-bottom: 8px; font-weight: 700; }
+.interaction-item input[type="text"], .travel-step input, .travel-step select { width: 100%; max-width: 100%; }
+.agree-row { display: flex; align-items: flex-start; gap: 8px; }
+.agree-row input { flex: 0 0 auto; width: auto; margin-top: 8px; }
+#agreeMessage { padding: 12px; border-radius: 10px; background-color: #f0f2ea; }
+#agreeMessage.is-ready { color: #245c3a; background-color: #e7f7ed; font-weight: 700; }
+#startButton:disabled { background-color: #737f73; cursor: not-allowed; }
+body.dark { color: #f4f4f8; background-color: #202b26; }
+body.dark p, body.dark nav a, body.dark h2 { color: #e0e8dc; }
+body.dark .feature-card, body.dark .subscribe-card, body.dark .interaction-item, body.dark .travel-step { border-color: #647461; background-color: #2d3d33; }
+body.dark #agreeMessage { color: #e0e8dc; background-color: #344a3c; }
+body.dark #agreeMessage.is-ready { color: #ddf3df; background-color: #34583e; }
+
+.travel-step select { padding: 12px; border: 1px solid #a9b6a5; border-radius: 10px; font: inherit; }
+.travel-step button { margin-top: 12px; }
+.travel-step .has-error { border: 2px solid #9d2439; }
+#travelError { color: #9d2439; }
+body.dark #travelError { color: #ffb8c2; }
+#travelPhrase { font-size: 30px; font-weight: 700; overflow-wrap: anywhere; }
+#travelSummary, #travelResult { overflow-wrap: anywhere; }
+@media (max-width: 768px) {
+    .tabs { flex-direction: column; align-items: stretch; }
+    .tab, .interaction-item button, .travel-step button { width: 100%; }
+    .interaction-item, .travel-step { padding: 20px; }
+    .travel-step button { margin-top: 8px; }
+}
+
+#practiceFlow[hidden], #practiceAnswer[hidden], #practiceFinished[hidden], #practiceCard[hidden], #practiceReveal[hidden] { display: none; }
+#practiceQuestion, #practiceJapanese { font-size: 26px; font-weight: 700; overflow-wrap: anywhere; }
+#practiceAnswer { margin-top: 20px; border-top: 1px solid #a9b6a5; }
+#practiceFlow button { margin-top: 12px; max-width: 100%; white-space: normal; }
+#practiceFeedback { padding: 12px; border-radius: 10px; background-color: #e9eedf; }
+body.dark #practiceFeedback { background-color: #34583e; }
+@media (max-width: 768px) {
+    #practiceFlow button { width: 100%; }
+    #practiceQuestion, #practiceJapanese { font-size: 22px; }
 }

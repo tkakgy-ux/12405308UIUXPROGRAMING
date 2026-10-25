@@ -1,89 +1,175 @@
 <!DOCTYPE html>
 <html lang="ko">
-
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tkakgy-Ux Test Page</title>
-
+    <title>혼자 떠나는 일본 여행 회화</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
   </head>
-
   <body>
      <!-- 
-     사용자 : 발표 불안이 있는 사람
-     목적 : 발표 불안을 낮추고 자신감 얻기
-     핵심 행동 : 발표 세션 설정하기
-     정보 순서 : 소개 -> 기능 -> 방법 -> 세션 설정
+    사용자 : 일본어가 익숙하지 않은 일본 혼자 여행자
+    목적 : 여행에 필요한 기본 표현을 확인하고 미리 연습하기
+    핵심 행동 : 여행 상황에 필요한 표현 확인하기
+    정보 순서 : 소개 -> 회화 상황 -> 방법 -> 학습 소식 신청
+    수업에 나오는 내용을 토대로 일본여행을 고민하던중 실제 도움이 될수 있는
+    환경을 만들어 보고자 프로젝트를 변경하게되었습니다.
      -->
      <header>
-        <h1>발표 훈련 서비스</h1>
-        <p>반복적인 연습으로 발표 불안을 줄이고, 자신감을 기릅니다.</p>
+        <h1>혼자 떠나는 일본 여행 회화</h1>
+        <p>일본 여행에 필요한 기본 표현을 확인하고, 여행 전에 연습합니다.</p>
         <nav aria-label="주요 메뉴">
             <a href="#about">서비스 소개</a>
-            <a href="#features">훈련 기능</a>
+            <a href="#features">여행 회화 상황</a>
             <a href="#steps">이용 방법</a>
-            <a href="#subscribe">훈련 소식 받기</a>
+            <a href="#subscribe">학습 소식 받기</a>
         </nav>
      </header>
-
      <main>
         <section id="about">
-            <h2>서비스소개</h2>
-            <h3>안전한 환경에서 반복하는 발표 연습</h3>
-            <img src="assets/images/uiux.jpg" alt="UI/UX프로그래밍 강의실">
-            <p>가상 청중 앞에서 발표를 연습할 수 있는 안전한 환경을 제공합니다.</p>
-            <p>연습이 끝나면 발표 결과를 확인하고 개선할 부분을 파악할 수 있습니다.</p>
-        </section>  
-
+            <h2>서비스 소개</h2>
+            <h3>혼자 하는 일본 여행, 필요한 말부터 시작하기</h3>
+            <img src="assets/images/japan.jpg" alt="나만의 속도로, 일본 — 해와 산, 도리이가 있는 일본 여행 풍경">
+            <p>일본어가 익숙하지 않은 혼자 여행자를 위한 여행 회화 서비스를 준비하고 있습니다.</p>
+            <p>여행 중 필요한 표현을 찾아보고, 출발 전에는 자주 쓰는 표현을 연습할 수 있도록 구성할 예정입니다.</p>
+        </section>
         <section id="features">
-            <h2>훈련 기능</h2>
+            <h2>여행 회화 상황</h2>
+            
+            <div class="tabs" role="group" aria-label="여행 회화 상황 선택">
+                <button class="tab is-active" type="button" aria-pressed="true" data-target="#panel-food">음식점</button>
+                <button class="tab" type="button" aria-pressed="false" data-target="#panel-transport">교통</button>
+                <button class="tab" type="button" aria-pressed="false" data-target="#panel-hotel">숙소</button>
+            </div>
             <ul class="features-list">
-                <li class="feature-card">
-                    <h3>단계별 발표 연습</h3>
-                    <p>연습한 발표 상황을 선택하고 반복해서 연습한다.</p>
+                <li class="feature-card panel is-active" id="panel-food">
+                    <h3>음식점에서 주문하기</h3>
+                    <p>혼자 왔어요. <span lang="ja">一人です。</span> (히토리데스)</p>
                 </li>
-
-                <li class="feature-card">
-                    <h3>가상 청중 연습</h3>                
-                    <p>가상 청중 앞에서 발표를 연습하고, 청중의 반응을 확인합니다.</p>
+                <li class="feature-card panel" id="panel-transport" hidden>
+                    <h3>교통 이용하기</h3>
+                    <p>역은 어디인가요? <span lang="ja">駅はどこですか。</span> (에키와 도코데스카)</p>
                 </li>
-                
-                <li class="feature-card">
-                    <h3>발표 피드백</h3>
-                    <p>발표 후, AI가 제공하는 피드백을 통해 개선점을 확인합니다.</p>
+                <li class="feature-card panel" id="panel-hotel" hidden>
+                    <h3>숙소 이용하기</h3>
+                    <p>예약했습니다. <span lang="ja">予約しています。</span> (요야쿠시테이마스)</p>
                 </li>
             </ul>
         </section>
+        
+        <section id="interaction-practice" class="settings-panel">
+            <h2>나의 여행 회화 준비</h2>
+            <div class="interaction-item">
+                <h3>화면 테마</h3>
+                <button id="themeButton" type="button">어두운 테마로 바꾸기</button>
+            </div>
+            <div class="interaction-item">
+                <label for="userName">여행자 이름 (10자 이내)</label>
+                <input id="userName" type="text" maxlength="10" aria-describedby="userNameCount">
+                <p id="userNameCount" aria-live="polite">0 / 10</p>
+            </div>
+            <div class="interaction-item">
+                <p>이 페이지는 기본 표현을 확인하는 학습용 화면입니다.</p>
+                <label class="agree-row" for="agreeCheck">
+                    <input id="agreeCheck" type="checkbox">이용 안내를 확인했습니다.
+                </label>
+                <p id="agreeMessage" aria-live="polite">안내 확인 후 여행 회화 준비를 시작할 수 있습니다.</p>
+                <button id="startButton" type="button" disabled>여행 회화 준비 시작하기</button>
+            </div>
+        </section>
+        
+        <section id="travelFlow" hidden>
+            <h2>여행 회화 준비하기</h2>
+            <p id="travelProgress" aria-live="polite">1 / 3 · 여행 정보 입력</p>
+            <section class="travel-step" data-step="1">
+                <h3 tabindex="-1">여행 정보 입력</h3>
+                <label for="travelName">여행자 이름 (필수, 10자 이내)</label>
+                <input id="travelName" type="text" maxlength="10" aria-describedby="travelError">
+                <label for="travelDate">출발 날짜 (필수)</label>
+                <input id="travelDate" type="date" aria-describedby="travelError">
+                <p id="travelError" role="alert"></p>
+                <button id="travelNext1" type="button">회화 상황 선택하기</button>
+            </section>
+            <section class="travel-step" data-step="2" hidden>
+                <h3 tabindex="-1">필요한 회화 상황 선택</h3>
+                <label for="travelSituation">여행 상황</label>
+                <select id="travelSituation">
+                    <option value="food">음식점</option>
+                    <option value="transport">교통</option>
+                    <option value="hotel">숙소</option>
+                </select>
+                <p id="situationHelp">음식점에서 혼자 왔다고 말하는 표현</p>
+                <button id="travelBack2" type="button">여행 정보 수정하기</button>
+                <button id="travelNext2" type="button">준비 내용 확인하기</button>
+            </section>
+            <section class="travel-step" data-step="3" hidden>
+                <h3 tabindex="-1">준비 내용 확인</h3>
+                <p id="travelSummary"></p>
+                <button id="travelBack3" type="button">회화 상황 수정하기</button>
+                <button id="travelComplete" type="button">여행 회화 준비 완료하기</button>
+            </section>
+            <section class="travel-step" data-step="4" hidden>
+                <h3 tabindex="-1">여행 회화 준비가 완료되었습니다</h3>
+                <p id="travelResult"></p>
+                <p id="travelPhrase" lang="ja"></p>
+                <p id="travelReading"></p>
+                <button id="practiceStart" type="button">이 상황의 표현 3개 연습하기</button>
+                <button id="travelRestart" type="button">처음부터 다시 준비하기</button>
+            </section>
+        </section>
+
+        <section id="practiceFlow" hidden>
+            <h2>여행 전 말하기 연습</h2>
+            <p id="practiceContext"></p>
+            <p id="practiceProgress" aria-live="polite"></p>
+            <div id="practiceCard" class="interaction-item">
+                <h3>뜻을 보고 일본어로 말하기</h3>
+                <p id="practiceQuestion"></p>
+                <button id="practiceReveal" type="button">일본어 정답 확인하기</button>
+                <div id="practiceAnswer" hidden>
+                    <p id="practiceJapanese" lang="ja"></p>
+                    <p id="practiceReading"></p>
+                    <p>말한 내용이 정답과 같은지 확인해주세요.</p>
+                    <button id="practiceRemember" type="button">기억했어요</button>
+                    <button id="practiceRetry" type="button">다시 연습할래요</button>
+                </div>
+            </div>
+            <p id="practiceFeedback" role="status"></p>
+            <div id="practiceFinished" hidden>
+                <p id="practiceResult"></p>
+                <button id="practiceAgain" type="button">같은 상황 다시 연습하기</button>
+            </div>
+            <button id="practiceBack" type="button">연습 종료하고 준비 완료로 돌아가기</button>
+        </section>
 
         <section id="steps">
-            <h2> 이용 방법</h2>
+            <h2>이용 방법</h2>
             <ol>
-                <li>회원가입 및 로그인</li>
-                <li>원하는 발표 주제를 확인합니다.</li>
-                <li>단계별 발표 연습을 시작합니다.</li>
-                <li>가상 청중 앞에서 발표를 연습합니다.</li>
-                <li>AI가 제공하는 피드백을 확인하고 개선 합니다.</li>
+                <li>여행자 이름을 입력하고 이용 안내를 확인합니다.</li>
+                <li>여행 회화 준비를 시작하고 이름과 출발 날짜를 입력합니다.</li>
+                <li>음식점, 교통, 숙소 중 필요한 상황을 선택합니다.</li>
+                <li>입력한 내용을 확인하고 준비를 완료합니다.</li>
+                <li>완료 화면의 일본어 표현을 소리 내어 읽어봅니다.</li>
             </ol>
         </section>
-
-        <section id="subscribe" class="subcribe-card">
-            <h2>훈련 소식 받기</h2>
-            <form>
+        <section id="subscribe" class="subscribe-card">
+            <h2>학습 소식 받기</h2>
+            <form id="subscribeForm">
                 <label for="email">이메일</label>
                 <input type="email" id="email" name="email">
-                <button type="submit">훈련 소식 신청하기</button>
+                <button id="subscribeButton" type="submit">학습 소식 신청하기</button>
             </form>
+            <p id="subscribeMessage" aria-live="polite">
+                이메일을 입력한 뒤 신청해주세요.
+            </p>
         </section>
      </main>
-
      <footer>
-        <small>@ 2026 발표 훈련 서비스</small>
+        <small>© 2026 혼자 떠나는 일본 여행 회화</small>
      </footer>
-
+    <script src="script.js"></script>
   </body>
 </html>
