@@ -269,6 +269,7 @@ body.dark #practiceFeedback { background-color: #34583e; }
 }
 
 
+/* 9주차: 기존 여행 회화 화면에 추가된 입력 폼 */
 .request-card { margin-top: 40px; padding: 24px; border: 1px solid #dfe3da; border-radius: 12px; background: #e9eedf; }
 #requestForm { display: block; }
 .request-field { margin: 18px 0; min-width: 0; }
@@ -299,7 +300,57 @@ body.dark .field-feedback.is-valid, body.dark #requestStatus.is-success { color:
 .request-field select:focus, .request-field textarea:focus { outline: 3px solid #8da77d; outline-offset: 2px; }
 @media (max-width: 768px) { .request-card { padding: 18px; } .request-actions { flex-direction: column; } .request-actions button { width: 100%; } }
 
+/* 9주차 교안 9·16쪽: 키보드 초점과 저장 중 상태를 시각적으로 구분 */
 .request-field input:focus-visible, .request-field select:focus-visible, .request-field textarea:focus-visible { outline: 3px solid #89a7ff; outline-offset: 2px; }
 .request-field input[aria-invalid="true"], .request-field select[aria-invalid="true"], .request-field textarea[aria-invalid="true"] { border-color: #a11e35; }
 #requestForm[aria-busy="true"] #requestStatus { background-color: #eeefff; color: #303e75; }
 body.dark #requestForm[aria-busy="true"] #requestStatus { background-color: #354463; color: #f0f2ff; }
+
+/* 9주차 레이아웃 최종 수정: 기존 form 가로 정렬과 충돌하지 않도록 신청 폼만 세로 배치 */
+#requestForm {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+    min-width: 0;
+}
+#requestForm > .request-field,
+#requestForm > .request-actions,
+#requestForm > #requestStatus {
+    width: 100%;
+    min-width: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#requestForm .request-radio-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+}
+#requestForm .request-radio-row label,
+#requestForm label.request-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    white-space: normal;
+    word-break: keep-all;
+}
+#requestForm input[type="radio"],
+#requestForm input[type="checkbox"] {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: auto;
+    margin: 0;
+}
+#requestForm .request-actions button {
+    width: auto;
+    min-width: 140px;
+    white-space: normal;
+    word-break: keep-all;
+}
+@media (max-width: 768px) {
+    #requestForm .request-actions { flex-direction: column; }
+    #requestForm .request-actions button { width: 100%; }
+}
