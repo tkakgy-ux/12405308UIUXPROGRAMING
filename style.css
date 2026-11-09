@@ -206,11 +206,7 @@ button:active {
 
 #subscribeMessage {
     margin-top: 16px;
-<<<<<<< HEAD
     color: #626f63;
-=======
-    color: #555763;        
->>>>>>> 9665f78eb3f280fddc3459b51b7fe830d7a3f6aa
 }
 
 #subscribeMessage.is-success {
@@ -223,7 +219,6 @@ button:active {
 
 #subscribeButton:disabled {
     color: #ffffff;
-<<<<<<< HEAD
     background-color: #737f73;
     cursor: not-allowed;
 }
@@ -272,8 +267,41 @@ body.dark #practiceFeedback { background-color: #34583e; }
     #practiceFlow button { width: 100%; }
     #practiceQuestion, #practiceJapanese { font-size: 22px; }
 }
-=======
-    background-color: #a8a8b2;
-    cursor: not-allowed;
-}
->>>>>>> 9665f78eb3f280fddc3459b51b7fe830d7a3f6aa
+
+
+/* 9주차: 기존 여행 회화 화면에 추가된 입력 폼 */
+.request-card { margin-top: 40px; padding: 24px; border: 1px solid #dfe3da; border-radius: 12px; background: #e9eedf; }
+#requestForm { display: block; }
+.request-field { margin: 18px 0; min-width: 0; }
+.request-field > label, .request-field legend, #requestExtraArea > label { display: block; margin-bottom: 8px; font-weight: 700; }
+.request-field input:not([type=radio]):not([type=checkbox]), .request-field select, .request-field textarea { display: block; width: 100%; max-width: 100%; padding: 12px; border: 1px solid #a9b6a5; border-radius: 10px; font: inherit; background: #fff; color: #263c33; }
+.request-field fieldset, fieldset.request-field { border: 1px solid #a9b6a5; border-radius: 10px; padding: 14px; }
+.request-field fieldset legend, fieldset.request-field legend { padding: 0 6px; }
+.request-radio-row { display: flex; flex-wrap: wrap; gap: 14px; }
+.request-radio-row label, label.request-check { display: inline-flex; align-items: center; gap: 7px; font-weight: 500; }
+.request-radio-row input, .request-check input { width: auto; flex: 0 0 auto; accent-color: #254d42; }
+#requestExtraArea[hidden] { display: none; }
+#requestExtraArea { margin-top: 14px; }
+.field-help { margin: 5px 0; font-size: .9em; }
+.field-feedback { margin: 5px 0; font-size: .9em; min-height: 1.3em; }
+.field-feedback.is-error { color: #a11e35; font-weight: 700; }
+.field-feedback.is-valid { color: #245c3a; font-weight: 700; }
+.request-field .has-error { outline: 2px solid #a11e35; outline-offset: 1px; }
+.request-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.request-actions .request-secondary { background: #64766c; }
+#requestStatus { padding: 12px; border-radius: 10px; background: #fff; }
+#requestStatus.is-error { color: #a11e35; font-weight: 700; }
+#requestStatus.is-success { color: #245c3a; font-weight: 700; }
+#requestSubmit:disabled { background: #737f73; cursor: not-allowed; }
+body.dark .request-card { background: #2d3d33; border-color: #647461; }
+body.dark #requestStatus { background: #344a3c; }
+body.dark .field-feedback.is-error, body.dark #requestStatus.is-error { color: #ffbbc7; }
+body.dark .field-feedback.is-valid, body.dark #requestStatus.is-success { color: #bcf2c9; }
+.request-field select:focus, .request-field textarea:focus { outline: 3px solid #8da77d; outline-offset: 2px; }
+@media (max-width: 768px) { .request-card { padding: 18px; } .request-actions { flex-direction: column; } .request-actions button { width: 100%; } }
+
+/* 9주차 교안 9·16쪽: 키보드 초점과 저장 중 상태를 시각적으로 구분 */
+.request-field input:focus-visible, .request-field select:focus-visible, .request-field textarea:focus-visible { outline: 3px solid #89a7ff; outline-offset: 2px; }
+.request-field input[aria-invalid="true"], .request-field select[aria-invalid="true"], .request-field textarea[aria-invalid="true"] { border-color: #a11e35; }
+#requestForm[aria-busy="true"] #requestStatus { background-color: #eeefff; color: #303e75; }
+body.dark #requestForm[aria-busy="true"] #requestStatus { background-color: #354463; color: #f0f2ff; }

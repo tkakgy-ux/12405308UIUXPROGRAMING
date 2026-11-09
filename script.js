@@ -315,3 +315,182 @@ document.querySelector("#travelRestart").addEventListener("click", clearPractice
 agreeCheck.addEventListener("change", function () {
     if (!agreeCheck.checked) clearPractice();
 });
+
+// 9주차 과제: 일본 여행 회화 맞춤 학습 신청 폼
+const requestForm = document.querySelector("#requestForm");
+const requestName = document.querySelector("#requestName");
+const requestDeparture = document.querySelector("#requestDeparture");
+const requestRegion = document.querySelector("#requestRegion");
+const requestSituationRadios = [...document.querySelectorAll('input[name="requestSituation"]')];
+const requestExtraCheck = document.querySelector("#requestExtraCheck");
+const requestExtraArea = document.querySelector("#requestExtraArea");
+const requestExtraText = document.querySelector("#requestExtraText");
+const requestSubmit = document.querySelector("#requestSubmit");
+const requestReset = document.querySelector("#requestReset");
+const requestStatus = document.querySelector("#requestStatus");
+let requestSubmitting = false;
+let requestAttempted = false;
+
+function requestToday() {
+    const now = new Date();
+    const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0, 10);
+}
+requestDeparture.min = requestToday();
+
+function showRequestFeedback(element, message, state) {
+    const feedbackId = element === requestExtraText ? "requestExtraFeedback" : element.id + "Feedback";
+    const feedback = document.getElementById(feedbackId);
+    feedback.textContent = message;
+    feedback.classList.toggle("is-error", state === "error");
+    feedback.classList.toggle("is-valid", state === "valid");
+    element.classList.toggle("has-error", state === "error");
+    element.setAttribute("aria-invalid", String(state === "error"));
+}
+
+function checkRequestName(showError) {
+    const length = requestName.value.trim().length;
+    const valid = length >= 2 && length <= 10;
+    const message = valid ? length + " / 10글자 · 입력 조건 충족" : length + " / 10글자 · 이름을 2~10글자로 입력해주세요.";
+    showRequestFeedback(requestName, message, valid ? "valid" : showError ? "error" : "neutral");
+    return valid;
+}
+function checkRequestDeparture(showError) {
+    const value = requestDeparture.value;
+    const valid = Boolean(value) && requestDeparture.validity.valid && value >= requestToday();
+    showRequestFeedback(requestDeparture, valid ? "출발 날짜가 확인되었습니다." : "오늘 이후의 출발 날짜를 선택해주세요.", valid ? "valid" : showError ? "error" : "neutral");
+    return valid;
+}
+function checkRequestRegion(showError) {
+    const valid = requestRegion.value !== "";
+    showRequestFeedback(requestRegion, valid ? "여행 지역을 선택했습니다." : "여행 지역을 선택해주세요.", valid ? "valid" : showError ? "error" : "neutral");
+    return valid;
+}
+function checkRequestSituation(showError) {
+    const valid = requestSituationRadios.some(radio => radio.checked);
+    const feedback = document.querySelector("#requestSituationFeedback");
+    feedback.textContent = valid ? "회화 상황을 선택했습니다." : "음식점, 교통, 숙소 중 하나를 선택해주세요.";
+    feedback.classList.toggle("is-error", !valid && showError);
+    feedback.classList.toggle("is-valid", valid);
+    requestSituationRadios.forEach(radio => radio.setAttribute("aria-invalid", String(!valid && showError)));
+    return valid;
+}
+function checkRequestExtra(showError) {
+    if (!requestExtraCheck.checked) return true;
+    const length = requestExtraText.value.trim().length;
+    const valid = length >= 10 && length <= 200;
+    showRequestFeedback(requestExtraText, valid ? length + " / 200글자 · 입력 조건 충족" : length + " / 200글자 · 10글자 이상 작성해주세요.", valid ? "valid" : showError ? "error" : "neutral");
+    return valid;
+}
+function updateRequestExtra() {
+    const active = requestExtraCheck.checked;
+    requestExtraArea.hidden = !active;
+    requestExtraText.disabled = !active;
+    requestExtraCheck.setAttribute("aria-expanded", String(active));
+    if (!active) {
+        requestExtraText.value = "";
+        showRequestFeedback(requestExtraText, "0 / 200글자 · 10글자 이상 필요", "neutral");
+    } else {
+        checkRequestExtra(requestAttempted);
+    }
+}
+function validateRequest(showError) {
+    // 단락 평가를 위해 모두 검사하며, 첫 번째 오류 항목을 반환합니다.
+    const checks = [
+        [requestName, checkRequestName(showError)],
+        [requestDeparture, checkRequestDeparture(showError)],
+        [requestRegion, checkRequestRegion(showError)],
+        [requestSituationRadios[0], checkRequestSituation(showError)],
+        [requestExtraText, checkRequestExtra(showError)]
+    ];
+    return checks.find(item => !item[1]);
+}
+function updateRequestOnEdit() {
+    validateRequest(requestAttempted);
+    if (requestStatus.classList.contains("is-error") || requestStatus.classList.contains("is-success")) {
+        requestStatus.textContent = "입력 내용이 변경되었습니다. 내용을 확인하고 저장해주세요.";
+        requestStatus.className = "";
+    }
+}
+[requestName, requestDeparture, requestRegion, requestExtraText].forEach(input => {
+    input.addEventListener("input", updateRequestOnEdit);
+    input.addEventListener("change", updateRequestOnEdit);
+});
+requestSituationRadios.forEach(radio => radio.addEventListener("change", updateRequestOnEdit));
+requestExtraCheck.addEventListener("change", () => {
+    updateRequestExtra();
+    updateRequestOnEdit();
+});
+
+requestForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    if (requestSubmitting) return;
+    requestAttempted = true;
+    requestDeparture.min = requestToday();
+    const invalidItem = validateRequest(true);
+    if (invalidItem) {
+        requestStatus.textContent = "저장하지 못했습니다. 표시된 오류 항목을 수정해주세요.";
+        requestStatus.className = "is-error";
+        invalidItem[0].focus();
+        return;
+    }
+    requestSubmitting = true;
+    requestForm.setAttribute("aria-busy", "true");
+    requestSubmit.disabled = true;
+    requestReset.disabled = true;
+    requestSubmit.textContent = "저장 중...";
+    requestStatus.textContent = "학습 계획을 저장하고 있습니다...";
+    requestStatus.className = "";
+    // 9주차 교안 15쪽: name을 가진 활성화된 입력값만 FormData로 수집
+    const formValues = new FormData(requestForm);
+    const data = {
+        name: String(formValues.get("travelerName") || "").trim(),
+        departure: String(formValues.get("departure") || ""),
+        region: String(formValues.get("region") || ""),
+        situation: String(formValues.get("requestSituation") || ""),
+        extra: String(formValues.get("extraText") || "").trim(),
+        savedAt: new Date().toISOString()
+    };
+    try {
+        // 저장 실패 시 입력값을 남기고 재시도할 수 있도록 예외 처리합니다.
+        await new Promise(resolve => setTimeout(resolve, 500));
+        localStorage.setItem("japanTravelLearningRequest", JSON.stringify(data));
+        requestStatus.textContent = "저장 완료! " + data.name + " 님의 " + data.region + " 여행 회화 학습 계획이 이 브라우저에 저장되었습니다.";
+        requestStatus.className = "is-success";
+    } catch (error) {
+        requestStatus.textContent = "브라우저 저장에 실패했습니다. 저장 공간 또는 브라우저 설정을 확인한 뒤 다시 시도해주세요. 입력 내용은 그대로 유지됩니다.";
+        requestStatus.className = "is-error";
+    } finally {
+        requestSubmitting = false;
+        requestForm.setAttribute("aria-busy", "false");
+        requestReset.disabled = false;
+        requestSubmit.disabled = false;
+        requestSubmit.textContent = "학습 계획 저장하기";
+    }
+});
+
+requestReset.addEventListener("click", function () {
+    if (requestSubmitting) return;
+    requestForm.reset();
+    requestAttempted = false;
+    requestForm.setAttribute("aria-busy", "false");
+    requestSituationRadios.forEach(radio => radio.removeAttribute("aria-invalid"));
+    requestDeparture.min = requestToday();
+    updateRequestExtra();
+    [requestName, requestDeparture, requestRegion, requestExtraText].forEach(input => {
+        input.classList.remove("has-error");
+        input.removeAttribute("aria-invalid");
+    });
+    ["requestNameFeedback", "requestDepartureFeedback", "requestRegionFeedback", "requestSituationFeedback", "requestExtraFeedback"].forEach(id => {
+        const feedback = document.getElementById(id);
+        feedback.classList.remove("is-error", "is-valid");
+        feedback.textContent = "";
+    });
+    document.querySelector("#requestNameFeedback").textContent = "0 / 10글자 · 2글자 이상 필요";
+    document.querySelector("#requestExtraFeedback").textContent = "0 / 200글자 · 10글자 이상 필요";
+    requestStatus.textContent = "입력이 초기화되었습니다. 다시 작성할 수 있습니다.";
+    requestStatus.className = "";
+    requestSubmit.disabled = false;
+    requestSubmit.textContent = "학습 계획 저장하기";
+    requestName.focus();
+});

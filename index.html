@@ -25,6 +25,8 @@
             <a href="#about">서비스 소개</a>
             <a href="#features">여행 회화 상황</a>
             <a href="#steps">이용 방법</a>
+            <a href="#travel-request">나만의 학습 신청</a>
+            <a href="#travel-request">맞춤 학습 신청</a>
             <a href="#subscribe">학습 소식 받기</a>
         </nav>
      </header>
@@ -145,6 +147,64 @@
             <button id="practiceBack" type="button">연습 종료하고 준비 완료로 돌아가기</button>
         </section>
 
+        <section id="travel-request" class="request-card" aria-labelledby="requestTitle">
+            <h2 id="requestTitle">나만의 일본 여행 회화 학습 신청</h2>
+            <p>여행 지역과 필요한 표현을 알려주면 나에게 맞는 학습 계획을 저장할 수 있습니다. 이 신청은 서버로 전송되지 않고 현재 브라우저에만 저장됩니다.</p>
+            <form id="requestForm" novalidate aria-busy="false">
+                <div class="request-field">
+                    <label for="requestName">여행자 이름 <span aria-hidden="true">*</span></label>
+                    <input id="requestName" name="travelerName" type="text" maxlength="10" autocomplete="nickname" required aria-describedby="requestNameHelp requestNameFeedback">
+                    <p id="requestNameHelp" class="field-help">2~10글자로 입력해주세요.</p>
+                    <p id="requestNameFeedback" class="field-feedback" aria-live="polite">0 / 10글자 · 2글자 이상 필요</p>
+                </div>
+                <div class="request-field">
+                    <label for="requestDeparture">출발 날짜 <span aria-hidden="true">*</span></label>
+                    <input id="requestDeparture" name="departure" type="date" required aria-describedby="requestDepartureHelp requestDepartureFeedback">
+                    <p id="requestDepartureHelp" class="field-help">오늘 이후의 출발 날짜를 선택해주세요.</p>
+                    <p id="requestDepartureFeedback" class="field-feedback" aria-live="polite"></p>
+                </div>
+                <div class="request-field">
+                    <label for="requestRegion">여행 지역 <span aria-hidden="true">*</span></label>
+                    <select id="requestRegion" name="region" required aria-describedby="requestRegionHelp requestRegionFeedback">
+                        <option value="">지역을 선택해주세요</option>
+                        <option value="도쿄">도쿄</option>
+                        <option value="오사카">오사카</option>
+                        <option value="후쿠오카">후쿠오카</option>
+                        <option value="삿포로">삿포로</option>
+                        <option value="기타">기타 지역</option>
+                    </select>
+                    <p id="requestRegionHelp" class="field-help">가장 먼저 방문할 지역을 선택하세요.</p>
+                    <p id="requestRegionFeedback" class="field-feedback" aria-live="polite"></p>
+                </div>
+                <fieldset class="request-field">
+                    <legend>가장 필요한 회화 상황 <span aria-hidden="true">*</span></legend>
+                    <p id="requestSituationHelp" class="field-help">먼저 연습하고 싶은 상황을 하나 선택해주세요.</p>
+                    <div class="request-radio-row">
+                        <label><input type="radio" name="requestSituation" value="음식점"> 음식점</label>
+                        <label><input type="radio" name="requestSituation" value="교통"> 교통</label>
+                        <label><input type="radio" name="requestSituation" value="숙소"> 숙소</label>
+                    </div>
+                    <p id="requestSituationFeedback" class="field-feedback" aria-live="polite"></p>
+                </fieldset>
+                <div class="request-field">
+                    <label class="request-check" for="requestExtraCheck">
+                        <input id="requestExtraCheck" type="checkbox" aria-controls="requestExtraArea" aria-expanded="false"> 추가로 배우고 싶은 표현이 있어요
+                    </label>
+                    <div id="requestExtraArea" hidden>
+                        <label for="requestExtraText">추가 학습 요청 <span aria-hidden="true">*</span></label>
+                        <textarea id="requestExtraText" name="extraText" rows="4" minlength="10" maxlength="200" disabled aria-describedby="requestExtraHelp requestExtraFeedback"></textarea>
+                        <p id="requestExtraHelp" class="field-help">체크한 경우 10~200글자로 요청 내용을 작성해주세요.</p>
+                        <p id="requestExtraFeedback" class="field-feedback" aria-live="polite">0 / 200글자 · 10글자 이상 필요</p>
+                    </div>
+                </div>
+                <div class="request-actions">
+                    <button type="submit" id="requestSubmit">학습 계획 저장하기</button>
+                    <button type="button" id="requestReset" class="request-secondary">다시 작성</button>
+                </div>
+                <p id="requestStatus" role="status" aria-live="polite">필수 항목을 입력하면 학습 계획을 저장할 수 있습니다.</p>
+            </form>
+        </section>
+
         <section id="steps">
             <h2>이용 방법</h2>
             <ol>
@@ -153,6 +213,7 @@
                 <li>음식점, 교통, 숙소 중 필요한 상황을 선택합니다.</li>
                 <li>입력한 내용을 확인하고 준비를 완료합니다.</li>
                 <li>완료 화면의 일본어 표현을 소리 내어 읽어봅니다.</li>
+                <li>맞춤 학습 신청 폼에서 여행 지역과 필요한 회화 상황을 선택해 저장합니다.</li>
             </ol>
         </section>
         <section id="subscribe" class="subscribe-card">
