@@ -316,7 +316,6 @@ agreeCheck.addEventListener("change", function () {
     if (!agreeCheck.checked) clearPractice();
 });
 
-// 9주차 과제: 일본 여행 회화 맞춤 학습 신청 폼
 const requestForm = document.querySelector("#requestForm");
 const requestName = document.querySelector("#requestName");
 const requestDeparture = document.querySelector("#requestDeparture");
@@ -441,7 +440,6 @@ requestForm.addEventListener("submit", async function (event) {
     requestSubmit.textContent = "저장 중...";
     requestStatus.textContent = "학습 계획을 저장하고 있습니다...";
     requestStatus.className = "";
-    // 9주차 교안 15쪽: name을 가진 활성화된 입력값만 FormData로 수집
     const formValues = new FormData(requestForm);
     const data = {
         name: String(formValues.get("travelerName") || "").trim(),
